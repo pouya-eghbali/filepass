@@ -1,6 +1,6 @@
 /*
     FilePass created and coded by Pooya Eghbali.
-    This file released under GPLv3.
+    This file released under terms of GPLv3.
     Please do not remove authors name and license info.
     https://github.com/pooya-eghbali/filepass
 */
