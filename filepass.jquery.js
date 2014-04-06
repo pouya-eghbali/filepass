@@ -1,5 +1,14 @@
+/*
+    FilePass created and coded by Pooya Eghbali.
+    This file released under GPLv3.
+    Please do not remove authors name and license info.
+    https://github.com/pooya-eghbali/filepass
+*/
 
-/*  This is the char map to convert hash to a real password.
+// --- Actual Code:
+
+/*  
+    This is the char map to convert hash to a real password.
     DO NOT EDIT THIS. This map is random generated and will not be changed.
     If you edit this, you'll break filepass global password compatibility.
 */
@@ -18,8 +27,8 @@ var filepass_show = function(obj) {
         $(obj).addClass('filepass-dropdown-open').show();
         filepass_position();
 
-		//return
-		return false;
+        //return
+        return false;
     }
 
 var filepass_hide = function () {
@@ -33,87 +42,87 @@ var filepass_hide = function () {
     }
 
 var filepass_position = function () {
-		$('.filepass-dropdown').each(function(){
-			var offset = $(this).data('pass-field').offset();
-			var height = $(this).data('pass-field').outerHeight();
-			$(this).css('left', offset.left)
-				   .css('top', offset.top + height);
-		});
+        $('.filepass-dropdown').each(function(){
+            var offset = $(this).data('pass-field').offset();
+            var height = $(this).data('pass-field').outerHeight();
+            $(this).css('left', offset.left)
+                   .css('top', offset.top + height);
+        });
     }
-	
+    
 $(document).click(function(){filepass_hide()});
 $(window).on('resize', filepass_position);
 
 //extending jquery with filepass initializer
 
 $.fn.extend({
-	filepass: function(){
-		//create file input for field:
-		
-		return $(this).each(function(){
-		
-			var input = $('<input>').attr('type' , 'file')
-									.addClass('filepass-file-field')
-									.data('pass-field', $(this))
-									.on('change', function(e){
-										
-										var field    = $(e.target).data('pass-field');
-										var strength = $(e.target).data('strength');
-										var file     = e.target.files[0];
-										var reader   = new FileReader();
-										reader.onload = function(e) {
-											
-											var rawData = reader.result;
-											var hash    = sjcl.hash.sha256.hash(rawData);
-											var hex     = sjcl.codec.hex.fromBits(hash);
-											var pass    = '';
-																																
-											for (i = 0; i < strength; i++) pass += FILEPASS_CHARACTER_MAP[hex[i*2] + hex[i*2+1]];
-											field.val(pass);
-										}
-										reader.readAsBinaryString(file);
-									});
-			
-			var container = $('<div>').addClass("filepass-dropdown")
-									  .addClass("filepass-dropdown-tip")
-									  .addClass("has-icons")
-									  .data('pass-field', $(this))
-			var menu      =  $('<ul>').addClass("filepass-dropdown-menu");
-			
-			var _8char    =  $('<li>').append($('<a>')
-									  .html('Insert <span style = "color: transparent">0</span>8Char FilePass')
-									  .addClass('filepass-basic-pass')
-									  .data("file-field", input)
-									  .click(function(){$(this).data('file-field').data('strength',  8).click()}));
-			var _16char   =  $('<li>').append($('<a>')
-									  .text('Insert 16Char FilePass')
-									  .addClass('filepass-medium-pass')
-									  .data("file-field", input)
-									  .click(function(){$(this).data('file-field').data('strength', 16).click()}));
-			var _32char   =  $('<li>').append($('<a>')
-									  .text('Insert 32Char FilePass')
-									  .addClass('filepass-strong-pass')
-									  .data("file-field", input)
-									  .click(function(){$(this).data('file-field').data('strength', 32).click()}));
-			var _divider  =  $('<li>').addClass("filepass-dropdown-divider")
-			var _close    =  $('<li>').append($('<a>')
-									  .text('Hide the menu...')
-									  .addClass('filepass-menu-hide')
-									  .data("input-field", $(this))
-									  .click(function(){filepass_hide(); $(this).data('input-field').focus(); return false}));
-			
-			container.append(menu.append(_8char)
-								 .append(_16char)
-								 .append(_32char)
-								 .append(_divider)
-								 .append(_close));
-								 
-			$(this).after(input).click(function(){return filepass_show(container)});
-			$('body').append(container);
-			
-			return $(this);
-		});
-	}
+    filepass: function(){
+        //create file input for field:
+        
+        return $(this).each(function(){
+        
+            var input = $('<input>').attr('type' , 'file')
+                                    .addClass('filepass-file-field')
+                                    .data('pass-field', $(this))
+                                    .on('change', function(e){
+                                        
+                                        var field    = $(e.target).data('pass-field');
+                                        var strength = $(e.target).data('strength');
+                                        var file     = e.target.files[0];
+                                        var reader   = new FileReader();
+                                        reader.onload = function(e) {
+                                            
+                                            var rawData = reader.result;
+                                            var hash    = sjcl.hash.sha256.hash(rawData);
+                                            var hex     = sjcl.codec.hex.fromBits(hash);
+                                            var pass    = '';
+                                                                                                                                
+                                            for (i = 0; i < strength; i++) pass += FILEPASS_CHARACTER_MAP[hex[i*2] + hex[i*2+1]];
+                                            field.val(pass);
+                                        }
+                                        reader.readAsBinaryString(file);
+                                    });
+            
+            var container = $('<div>').addClass("filepass-dropdown")
+                                      .addClass("filepass-dropdown-tip")
+                                      .addClass("has-icons")
+                                      .data('pass-field', $(this))
+            var menu      =  $('<ul>').addClass("filepass-dropdown-menu");
+            
+            var _8char    =  $('<li>').append($('<a>')
+                                      .html('Insert <span style = "color: transparent">0</span>8Char FilePass')
+                                      .addClass('filepass-basic-pass')
+                                      .data("file-field", input)
+                                      .click(function(){$(this).data('file-field').data('strength',  8).click()}));
+            var _16char   =  $('<li>').append($('<a>')
+                                      .text('Insert 16Char FilePass')
+                                      .addClass('filepass-medium-pass')
+                                      .data("file-field", input)
+                                      .click(function(){$(this).data('file-field').data('strength', 16).click()}));
+            var _32char   =  $('<li>').append($('<a>')
+                                      .text('Insert 32Char FilePass')
+                                      .addClass('filepass-strong-pass')
+                                      .data("file-field", input)
+                                      .click(function(){$(this).data('file-field').data('strength', 32).click()}));
+            var _divider  =  $('<li>').addClass("filepass-dropdown-divider")
+            var _close    =  $('<li>').append($('<a>')
+                                      .text('Hide the menu...')
+                                      .addClass('filepass-menu-hide')
+                                      .data("input-field", $(this))
+                                      .click(function(){filepass_hide(); $(this).data('input-field').focus(); return false}));
+            
+            container.append(menu.append(_8char)
+                                 .append(_16char)
+                                 .append(_32char)
+                                 .append(_divider)
+                                 .append(_close));
+                                 
+            $(this).after(input).click(function(){return filepass_show(container)});
+            $('body').append(container);
+            
+            return $(this);
+        });
+    }
 });
 
 // Stanford Javascript Crypto Library (SJCL)
