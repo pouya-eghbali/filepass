@@ -57,10 +57,13 @@ $(window).on('resize', filepass_position);
 
 $.fn.extend({
     filepass: function(){
-        //create file input for field:
         
         return $(this).each(function(){
+		
+			if ($(this).data('filepassed')) return;
+			$(this).data('filepassed', true);
         
+			//create file input for field:
             var input = $('<input>').attr('type' , 'file')
                                     .addClass('filepass-file-field')
                                     .data('pass-field', $(this))
@@ -120,7 +123,6 @@ $.fn.extend({
             $(this).after(input).click(function(){return filepass_show(container)});
             $('body').append(container);
             
-            return $(this);
         });
     }
 });
