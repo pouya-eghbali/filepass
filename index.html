@@ -1,18 +1,30 @@
-<html lang="en-US" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>FilePass</title>
-    <link href="filepass.css" rel="stylesheet" />
-    <script src="jquery.min.js"></script>
-    <script src="filepass.js"></script>
-    <script src="filepass.init.js"></script>
-  </head>
-  <body>
-    <section>
-      <p> Filepass demo <small> <a href="http://github.com/pooya-eghbali/filepass"> source </a> <small></p>
-      <input type="text" name="password">
-      <p><small> * it was created to be used with password fields, this is just a demo </small></p>
-      <p><small> ** works with html5 file api, no file uploads </small></p>
-    </section>
-  </body>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>FilePass</title>
+  <link rel="stylesheet" href="filepass.css">
+  <link rel="stylesheet" href="main.css">
+</head>
+
+<body>
+  <section>
+    <div class="row">
+      <h1> FilePass </h1>
+    </div>
+    <div class="row">
+      <input type="text" placeholder="Click here *" name="password" id="password" autocomplete="off">
+    </div>
+    <div class="row">
+      * This does not upload your files into any server
+    </div>
+  </section>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sjcl/1.0.8/sjcl.min.js"></script>
+  <script src="filepass.js"></script>
+  <script src="main.js"></script>
+</body>
+
 </html>
